@@ -16,6 +16,10 @@ During inference, Mahalanobis distance is used to score each patch position of t
 
 ## Usage
 
+down load [anomalib](https://github.com/winniepooh520/anomalib_main)
+and replace the folder "anomalib_main/anomalib/models/padim/" with this folder
+and:
+
 `python tools/train.py --model padim`
 
 ## Benchmark
