@@ -17,6 +17,7 @@ from torch import Tensor
 from anomalib.models.components import AnomalyModule
 from anomalib.models.padim.torch_model import PadimModel
 
+
 logger = logging.getLogger(__name__)
 
 __all__ = ["Padim", "PadimLightning"]
@@ -39,6 +40,7 @@ class Padim(AnomalyModule):
         input_size: Tuple[int, int],
         backbone: str,
         pre_trained: bool = True,
+        
     ):
         super().__init__()
 
@@ -49,9 +51,11 @@ class Padim(AnomalyModule):
             pre_trained=pre_trained,
             layers=layers,
         ).eval()
+        
 
         self.stats: List[Tensor] = []
         self.embeddings: List[Tensor] = []
+
 
     @staticmethod
     def configure_optimizers():  # pylint: disable=arguments-differ
@@ -87,6 +91,7 @@ class Padim(AnomalyModule):
 
         logger.info("Fitting a Gaussian to the embedding collected from the training set.")
         self.stats = self.model.gaussian.fit(embeddings)
+        
 
     def validation_step(self, batch, _):  # pylint: disable=arguments-differ
         """Validation Step of PADIM.
